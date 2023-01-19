@@ -1,0 +1,23 @@
+.telaLogin{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.loginStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-items: center;
+
+    border: 1px solid black;
+    border-radius: 20px;
+
+    padding: 1.5% 3%;
+}
+
+.inputLoginSty {
+    margin-bottom: 4.5%;
+    padding: 10px;
+}
