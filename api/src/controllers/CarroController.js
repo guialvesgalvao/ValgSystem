@@ -1,4 +1,15 @@
 const CarroService = require('../services/CarroService');
+const express = require('express');
+const bodyParser = require('body-parser');
+
+const app = express();
+const adapt = express.json();
+
+// Use o body-parser para ler o corpo da requisição
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const la = true;
 
 module.exports = {
     buscarTodos: async (req,res)=> {
@@ -33,15 +44,18 @@ module.exports = {
     },
 
     inserir: async(req,res) => {
-        let json = {error:'', result:{}};
+        let json = {error:'', result:{}, testee: req.body};
+
+        console.log(res.headers)
+
 
         let nomeConta = req.body.nomeConta;
         let valor = req.body.valor;
         let obs = req.body.obs;
         let statusConta = req.body.statusConta;
         let vencimento = req.body.vencimento;
-
-        if(nomeConta && valor && obs && statusConta && vencimento){
+/* tirei as condições de necessidade no if e troquei por la (nomeConta && valor && ...) tente encontrar o erro na requi para o servidor de preferencia procurando onde estão os dados da req */
+        if(la){
             let CarroCodigo = await CarroService.inserir(nomeConta, valor, obs, statusConta, vencimento);
             json.result = {
                 codigo: CarroCodigo,

@@ -1,0 +1,21 @@
+.org-inventario{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.card-inventario{
+    width: 33%;
+    margin-top: 2rem;
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.org-desc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

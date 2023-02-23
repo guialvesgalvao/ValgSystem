@@ -13,18 +13,29 @@ export  const getStaticProps = async () => {
 
 export default function Painel ({ dados }) {
     
+    const [codigo, setCodigo] = useState('');
     const Contas = dados.result;
-
     const [updateDATA, setUpdateData] =  useState(false);
 
     async function UpdateData ( codigo ) {
       await console.log(codigo);
     }
- 
 
     return (
         <div className="centerDivs">
+          
+        <div className="centerDivs mb-3">
+          <input
+          className="intemDefaultSize"
+          placeholder="Conta"
+          type="username"
+          value={codigo}
+          onChange={(e)=> setCodigo(e.target.value)}/>
+          <button className="intemDefaultSize" >Pesquisar</button>
+        </div>
+
         <div className="tableStyle">
+        
           <Table  bordered hover size="sm" >
             <thead>
               <tr>
@@ -71,12 +82,3 @@ export default function Painel ({ dados }) {
         </div>
     )
 }
-
-/*        {Contas.map((Contas, key) => (
-  <ul key={Contas.codigo}>
-  <h6>{Contas.nomeConta}</h6>
-  <li>{Contas.valor}</li>
-  <li>{Contas.obs}</li>
-  <li>{Contas.vencimento}</li>
-</ul>
-))}*/

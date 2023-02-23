@@ -25,3 +25,20 @@
 .tableStyle{
     width: 60%;
 }
+
+.centerDivs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputInsertPage{
+    padding: 10px;
+    margin-bottom: 2.5px;
+    border-radius: 3px;
+}
+
+.intemDefaultSize{
+    width: 230px;
+    height: 40px;
+}

@@ -11,20 +11,17 @@ export default function Header () {
     return(
 <div>
       <Navbar expand="sm">
-      <NavbarBrand href="/">
-        <h1>Valg System</h1>
+      <NavbarBrand href="/painel">
+        <h3>Valg System</h3>
     </NavbarBrand>
         <NavbarToggler onClick={toggle}/>
         <Collapse isOpen={isOpen} navbar >
           <Nav className="me-auto" navbar>
           <NavItem>
-              <NavLink href="/">Inserir Conta</NavLink>
+              <NavLink href="/inserir-conta">Inserir Conta</NavLink>
             </NavItem>
             <NavItem>
-              <NavLink href="/about">Pesquisar Conta</NavLink>
-            </NavItem>
-            <NavItem>
-              <NavLink href="/contato">Histórico</NavLink>
+              <NavLink href="/historico">Histórico</NavLink>
             </NavItem>
           </Nav>
           
