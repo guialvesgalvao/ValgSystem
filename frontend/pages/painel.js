@@ -15,7 +15,11 @@ export  const getStaticProps = async () => {
 
 export default function Painel ({ dados }) {
 
-    const Contas = dados; 
+    const Contas = dados;
+    
+    const bill = Contas[1];
+
+    console.log(bill)
 
     return (
         <div className="container">
@@ -32,9 +36,9 @@ export default function Painel ({ dados }) {
               <div className="mycardBody">
 
                <div className="mycardText">
-                <span>Valor Mês: R$ 20,00</span>
-                <span>Valor Total: R$ 15,00</span>
-                <span>Prestações: 3</span>
+                <span >Valor Mês: R$ 20,00</span>
+                <span className="mb-1">Valor Total: R$ 15,00</span>
+                <span className="mb-3">Prestações: 3</span>
                </div>
 
                <div className="mycardButtons">

@@ -128,7 +128,7 @@ export default function Painel ({ dados }) {
           <Modal isOpen={modal} toggle={toggle} >
           <ModalHeader toggle={toggle}>Inserir Conta</ModalHeader>
           <ModalBody>
-          <input
+                  <input
                   className="inputInsertPage"
                   placeholder="Conta"
                   type="username"
@@ -158,6 +158,24 @@ export default function Painel ({ dados }) {
                   type="text"
                   value={statusConta}
                   onChange={(e)=> setStatusConta(e.target.value)}/>
+                  <input
+                  className="inputInsertPage"
+                  placeholder="Valor"
+                  type="number"
+                  value={valor}
+                  onChange={(e)=> setValor(e.target.value)}/>
+                  <input
+                  className="inputInsertPage"
+                  placeholder="Valor"
+                  type="number"
+                  value={valor}
+                  onChange={(e)=> setValor(e.target.value)}/>
+                  <input
+                  className="inputInsertPage"
+                  placeholder="Valor"
+                  type="number"
+                  value={valor}
+                  onChange={(e)=> setValor(e.target.value)}/>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={()=> {

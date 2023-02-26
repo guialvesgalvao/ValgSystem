@@ -15,7 +15,8 @@
 .mycard{
     width: 30%;
     border: 1px solid #000000;
-    border-radius: 14px;
+    border-radius: 3px;
+    box-shadow: 2.5px 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.4);
 }
 
 .mycardHeader{
@@ -25,6 +26,7 @@
     justify-content: space-between;
     align-items: center;
     padding: 3px;
+    background-color: #f8f8f8;
 }
 
 .mycardTitle{
@@ -38,24 +40,25 @@
     margin-right: 9px;
     font-size: 1.4rem;
     color: yellow;
-    border: 1px solid #000000;
 }
 
 .mycardBody{
     display: flex;
     flex-direction: column;
+    height: 100%;
 }
 
 .mycardText{
     display: flex;
     flex-direction: column;
     padding: 10px;
+    
 }
 
 .mycardButtons{
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     padding-bottom: 5px;
 }
 
@@ -67,18 +70,19 @@
     background-color: transparent;
 }
 
-.mycardPayedButton:hover{
-    background-color: green;
-    color: #fff;
-    border: none;
-}
-
-
 .mycardPayedButton{
     margin-right: 5px;
+
     padding: 7px;
     width: 75px;
     border-radius: 12px;
     border: 1px solid black;
     background-color: transparent;
+}
+
+.mycardPayedButton:hover{
+    background-color: green;
+    color: #fff;
+    border: none;
+    font-weight: 500;
 }
