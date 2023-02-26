@@ -1,9 +1,11 @@
-import { Button, Table} from "reactstrap";
+import { Button} from "reactstrap";
 import { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowCircleUp, faStar } from "@fortawesome/free-solid-svg-icons";
 
 export  const getStaticProps = async () => {
 
-  const res = await fetch('http://localhost:3000/api/carros');
+  const res = await fetch('http://localhost:3001/contas');
   const data = await res.json();
 
   return {
@@ -12,71 +14,43 @@ export  const getStaticProps = async () => {
 }
 
 export default function Painel ({ dados }) {
-    
-    const Contas = dados.result;
 
-    const [updateDATA, setUpdateData] =  useState(false);
-
-    async function UpdateData ( codigo ) {
-      await console.log(codigo);
-    }
- 
+    const Contas = dados; 
 
     return (
-        <div className="centerDivs">
-        <div className="tableStyle">
-          <Table  bordered hover size="sm" >
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nome Conta</th>
-                <th>Valor</th>
-                <th>Vencimento</th>
-                <th>Status</th>
-                <th>Obs</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-                {Contas.map((Contas, key) => (
-                  <tr key={Contas.codigo}>
-                <th scope="row">
-                {Contas.codigo}
-                </th>
-                <td>
-                {Contas.nomeConta}
-                </td>
-                <td>
-                R$ {Contas.valor}
-                </td>
-                <td>
-                {Contas.vencimento}
-                </td>
-                <td>
-                {Contas.statusConta}
-                </td>
-                <td>
-                {Contas.obs}
-                </td>
-                <td>
-                <Button color="info" onClick={() => UpdateData(Contas.codigo)}>editar</Button>
-                <span> </span>
-                <Button color="danger" >x</Button>
-                </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        </div>
+        <div className="container">
+
+          <h4>Valor Total do mês: R$ 3.000,00</h4>
+
+            <div className="mycard mt-4">
+
+              <div className="mycardHeader">
+                <span className="mycardTitle">Vivo</span>
+                <FontAwesomeIcon className="mycardStar" icon={faStar}/>
+              </div>
+
+              <div className="mycardBody">
+
+               <div className="mycardText">
+                <span>Valor Mês: R$ 20,00</span>
+                <span>Valor Total: R$ 15,00</span>
+                <span>Prestações: 3</span>
+               </div>
+
+               <div className="mycardButtons">
+                <button className="mycardPayedButton">Paga</button>
+                <button className="mycardUpstarsButton">
+                  <FontAwesomeIcon icon={faArrowCircleUp}/>
+                  <FontAwesomeIcon icon={faStar}/>
+                </button>
+               </div>
+
+              </div>
+
+            </div>
+
+
         </div>
     )
 }
 
-/*        {Contas.map((Contas, key) => (
-  <ul key={Contas.codigo}>
-  <h6>{Contas.nomeConta}</h6>
-  <li>{Contas.valor}</li>
-  <li>{Contas.obs}</li>
-  <li>{Contas.vencimento}</li>
-</ul>
-))}*/

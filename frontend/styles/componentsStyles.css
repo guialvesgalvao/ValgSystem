@@ -1,0 +1,84 @@
+ /* Header */
+
+ .navIntem{
+    color: #000000;
+    text-decoration: none;
+    list-style: none;
+ }
+
+ .hrSty{
+    box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.05);
+ }
+
+/* Card */
+
+.mycard{
+    width: 30%;
+    border: 1px solid #000000;
+    border-radius: 14px;
+}
+
+.mycardHeader{
+    border-bottom: 1px solid #000000;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px;
+}
+
+.mycardTitle{
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #000000;
+    margin-left: 9px;
+}
+
+.mycardStar{
+    margin-right: 9px;
+    font-size: 1.4rem;
+    color: yellow;
+    border: 1px solid #000000;
+}
+
+.mycardBody{
+    display: flex;
+    flex-direction: column;
+}
+
+.mycardText{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+
+.mycardButtons{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    padding-bottom: 5px;
+}
+
+.mycardUpstarsButton{
+    margin-right: 5px;
+    padding: 7px;
+    border-radius: 12px;
+    border: 1px solid black;
+    background-color: transparent;
+}
+
+.mycardPayedButton:hover{
+    background-color: green;
+    color: #fff;
+    border: none;
+}
+
+
+.mycardPayedButton{
+    margin-right: 5px;
+    padding: 7px;
+    width: 75px;
+    border-radius: 12px;
+    border: 1px solid black;
+    background-color: transparent;
+}
