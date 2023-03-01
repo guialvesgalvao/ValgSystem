@@ -8,18 +8,36 @@ export  const getStaticProps = async () => {
   const res = await fetch('http://localhost:3001/contas');
   const data = await res.json();
 
+   function organizarPorCodigoRelacional(arrayInicial) {
+    const mapeamento = {};
+  
+    for (const objeto of arrayInicial) {
+      const codigoRelacional = objeto.codigoRelacional;
+      if (!mapeamento[codigoRelacional]) {
+        mapeamento[codigoRelacional] = [];
+      }
+      mapeamento[codigoRelacional].push(objeto);
+    }
+  
+    const novoArray = Object.values(mapeamento);
+    return novoArray;
+  }
+
+  const novoArray = organizarPorCodigoRelacional(data);
+
+
+
   return {
-      props: { dados: data }
+      props: { dados: data, testeee: novoArray }
   }
 }
 
-export default function Painel ({ dados }) {
+export default function Painel ({ dados, testeee }) {
 
-    const Contas = dados;
+   console.log(testeee)
     
     const bill = Contas[1];
 
-    console.log(bill)
 
     return (
         <div className="container">
@@ -29,14 +47,14 @@ export default function Painel ({ dados }) {
             <div className="mycard mt-4">
 
               <div className="mycardHeader">
-                <span className="mycardTitle">Vivo</span>
+                <span className="mycardTitle">{bill.nomeConta}</span>
                 <FontAwesomeIcon className="mycardStar" icon={faStar}/>
               </div>
 
               <div className="mycardBody">
 
                <div className="mycardText">
-                <span >Valor Mês: R$ 20,00</span>
+                <span >Valor Mês: R$ {bill.valor}</span>
                 <span className="mb-1">Valor Total: R$ 15,00</span>
                 <span className="mb-3">Prestações: 3</span>
                </div>

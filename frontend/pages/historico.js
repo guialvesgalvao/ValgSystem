@@ -2,7 +2,7 @@ import { Button, Table, Modal, ModalHeader, ModalBody, ModalFooter} from "reacts
 import { useState } from "react";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
 
@@ -19,10 +19,13 @@ export  const getStaticProps = async () => {
 export default function Painel ({ dados }) {
 
     const [nomeConta, setNomeConta] = useState('');
-    const [valor, setValor] = useState(0);
+    const [valor, setValor] = useState(null);
     const [obs, setObs] = useState('');
     const [vencimento, setVencimento] = useState('');
     const [statusConta, setStatusConta] = useState('');
+    const [grauImportancia, setGrauImportancia] = useState(null);
+    const [codigoRelacional, setCodigoRelacional] = useState(null);
+    const [codigoMensal, setCodigoMensal] = useState(null);
   
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
@@ -37,7 +40,10 @@ export default function Painel ({ dados }) {
         valor: valor,
         obs: obs,
         statusConta: statusConta,
-        vencimento: vencimento
+        vencimento: vencimento,
+        grauImportancia: grauImportancia,
+        codigoRelacional: codigoRelacional,
+        codigoMensal: codigoMensal
       }, {
         headers: {
           'Content-Type': 'application/json'
@@ -57,10 +63,10 @@ export default function Painel ({ dados }) {
         <div className="divBarTop">
 
           <div>
-            <Button color="danger" onClick={toggle}>
-            <FontAwesomeIcon
+            <Button color="primary" onClick={toggle} >
+            <FontAwesomeIcon 
             icon={faPlus}/>
-               Inserir Conta
+                <span className="ml-2"> Inserir Conta</span>
             </Button>
           </div>
 
@@ -116,9 +122,11 @@ export default function Painel ({ dados }) {
                 {Contas.obs}
                 </td>
                 <td>
-                <Button color="info" onClick={() => UpdateData(Contas.codigo)}>editar</Button>
+                <Button color="info" onClick={() => UpdateData(Contas.codigo)}>          <FontAwesomeIcon icon={faEdit}/></Button>
                 <span> </span>
-                <Button color="danger" >x</Button>
+                <Button color="danger" >
+                  <FontAwesomeIcon icon={faClose}/>
+                </Button>
                 </td>
                 </tr>
               ))}
@@ -129,53 +137,61 @@ export default function Painel ({ dados }) {
           <ModalHeader toggle={toggle}>Inserir Conta</ModalHeader>
           <ModalBody>
                   <input
+                  title="Conta"
                   className="inputInsertPage"
                   placeholder="Conta"
                   type="username"
                   value={nomeConta}
                   onChange={(e)=> setNomeConta(e.target.value)}/>
                   <input
+                  title="Valor"
                   className="inputInsertPage"
                   placeholder="Valor"
                   type="number"
                   value={valor}
                   onChange={(e)=> setValor(e.target.value)}/>
                   <input
+                  title="Observação"
                   className="inputInsertPage"
                   placeholder="Observação"
                   type="text"
                   value={obs}
                   onChange={(e)=> setObs(e.target.value)}/>
                   <input
+                  title="Vencimento"
                   className="inputInsertPage"
                   placeholder="Vencimento"
                   type="text"
                   value={vencimento}
                   onChange={(e)=> setVencimento(e.target.value)}/>
                   <input
+                  title="Status"
                   className="inputInsertPage"
                   placeholder="Status"
                   type="text"
                   value={statusConta}
                   onChange={(e)=> setStatusConta(e.target.value)}/>
                   <input
+                  title="Grau Importância"
                   className="inputInsertPage"
-                  placeholder="Valor"
+                  placeholder="Grau Importância"
                   type="number"
-                  value={valor}
-                  onChange={(e)=> setValor(e.target.value)}/>
+                  value={grauImportancia}
+                  onChange={(e)=> setGrauImportancia(e.target.value)}/>
                   <input
+                  title="Código Relacional"
                   className="inputInsertPage"
-                  placeholder="Valor"
+                  placeholder="Código Relacional"
                   type="number"
-                  value={valor}
-                  onChange={(e)=> setValor(e.target.value)}/>
+                  value={codigoRelacional}
+                  onChange={(e)=> setCodigoRelacional(e.target.value)}/>
                   <input
+                  title="Código Mensal"
                   className="inputInsertPage"
-                  placeholder="Valor"
+                  placeholder="Código Mensal"
                   type="number"
-                  value={valor}
-                  onChange={(e)=> setValor(e.target.value)}/>
+                  value={codigoMensal}
+                  onChange={(e)=> setCodigoMensal(e.target.value)}/>
           </ModalBody>
           <ModalFooter>
             <Button color="primary" onClick={()=> {

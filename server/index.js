@@ -20,10 +20,13 @@ app.post("/cadastrarContas", (req,res)=>{
    const { obs } = req.body;
    const { statusConta } = req.body;
    const { vencimento } = req.body;
+   const { grauImportancia } = req.body;
+   const { codigoRelacional } = req.body;
+   const { codigoMensal } = req.body;
 
-   let SQL = "INSERT INTO conta (nomeConta, valor, obs, statusConta, vencimento) VALUES (?, ?, ?, ?, ?)";
+   let SQL = "INSERT INTO conta (nomeConta, valor, obs, statusConta, vencimento, grauImportancia, codigoRelacional, codigoMensal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
    
-   db.query(SQL, [nomeConta, valor, obs, statusConta, vencimento], (err,result) => {
+   db.query(SQL, [nomeConta, valor, obs, statusConta, vencimento, grauImportancia, codigoRelacional, codigoMensal], (err,result) => {
     console.log(err);
    });
 });
