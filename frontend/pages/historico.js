@@ -32,6 +32,7 @@ export default function Painel ({ dados }) {
 
     const [codigo, setCodigo] = useState('');
     const [Contas, setContas] = useState(dados)
+    
 
 
     async function axiosPost () {
