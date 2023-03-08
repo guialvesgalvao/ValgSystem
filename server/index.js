@@ -51,15 +51,30 @@ app.get("/contas", (req,res) =>{
     })
 });
 
-app.put("/edit", (req,res) =>{
+app.put("/pagar", (req,res) =>{
     const { id } = req.body;
-    const { name } = req.body;
-    const { cost } = req.body;
-    const { category } = req.body;
+    const statusConta = "P";
 
-    let SQL = "UPDATE games SET name = ?, cost = ?, category = ? WHERE idgames = ?";
+    let SQL = "UPDATE conta SET statusConta = ? WHERE codigo = ?";
 
-    db.query(SQL, [name, cost, category, id], (err, result) => {
+    db.query(SQL, [statusConta, id], (err, result) => {
+        if (err) console.log(err);
+        else res.send(result);
+    });
+});
+
+app.put("/editarContas", (req,res) =>{
+    const { id } = req.body;
+    const { nome } = req.body;
+    const { valor } = req.body;
+    const { obs } = req.body;
+    const { statusConta } = req.body;
+    const { vencimento } = req.body;
+
+
+    let SQL = "UPDATE conta SET nomeConta = ?, valor = ?, obs = ?, statusConta = ?, vencimento = ? WHERE codigo = ?";
+
+    db.query(SQL, [nome, valor, obs, statusConta, vencimento, id], (err, result) => {
         if (err) console.log(err);
         else res.send(result);
     });
@@ -67,7 +82,7 @@ app.put("/edit", (req,res) =>{
 
 app.delete("/delete/:id", (req,res) => {
     const { id } = req.params;
-    let SQL = "DELETE FROM games WHERE idgames = ?";
+    let SQL = "DELETE FROM conta WHERE codigo = ?";
     db.query(SQL, [id], (err, result) => {
         if (err) console.log(err);
         else res.send(result);

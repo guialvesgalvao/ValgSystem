@@ -11,48 +11,81 @@
  }
 
 /* Card */
+.bgDark{
+background-color: #100F10;
+}
+
+.valorTotalTitle{
+    color: #FAFAFA;
+}
+
+.orgCards {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.teste{
+    color: #FAFAFA !important;
+    background-color: aqua !important;
+    
+}
 
 .mycard{
     width: 30%;
-    border: 1px solid #000000;
-    border-radius: 3px;
-    box-shadow: 2.5px 2.5px 2.5px 2.5px rgba(0, 0, 0, 0.4);
+   /* border: 1px solid #000000; */
+    border-radius: 12px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+    background-color: #242424;
+    /* 2.5 original*/
 }
 
 .mycardHeader{
-    border-bottom: 1px solid #000000;
+    /*border-bottom: 1px solid #000000;*/
+    border-radius: 12px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 3px;
-    background-color: #f8f8f8;
+    padding: 6px 3px;
+    background-color: #242424;
 }
 
 .mycardTitle{
-    font-size: 1.8rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: #000000;
     margin-left: 9px;
+    background-color: #242424;
 }
 
 .mycardStar{
     margin-right: 9px;
     font-size: 1.4rem;
-    color: yellow;
+    background-color: #242424;
 }
 
 .mycardBody{
     display: flex;
     flex-direction: column;
     height: 100%;
+    
+    
 }
 
 .mycardText{
     display: flex;
     flex-direction: column;
     padding: 10px;
-    
+    font-size: 1.03rem;    
+    font-weight: 500;
+    background-color: #242424;
+}
+
+.mycardSpan{
+    color: rgba(255, 255, 255, 0.85);
+    background-color: #242424;
 }
 
 .mycardButtons{
@@ -60,24 +93,30 @@
     flex-direction: row;
     justify-content: flex-end;
     padding-bottom: 5px;
+    font-size: 1.02rem; 
+    background-color: #242424;
+    border-radius: 12px;
 }
 
 .mycardUpstarsButton{
     margin-right: 5px;
-    padding: 7px;
     border-radius: 12px;
-    border: 1px solid black;
+    border: 0.3px solid black;
     background-color: transparent;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
-.mycardPayedButton{
-    margin-right: 5px;
 
-    padding: 7px;
-    width: 75px;
-    border-radius: 12px;
-    border: 1px solid black;
-    background-color: transparent;
+.mycardPayedButton{
+    font-size: 1rem;
+    font-weight: 500;
+    margin-right: 5px;
+    width: 80%;
+    border-radius: 9px;
+    border: none;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+    background-color: green;
+    
 }
 
 .mycardPayedButton:hover{
@@ -85,4 +124,10 @@
     color: #fff;
     border: none;
     font-weight: 500;
+}
+
+@media screen and (max-width:1023px){
+    .mycard{
+        width: 100%;
+    }
 }

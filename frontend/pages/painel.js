@@ -1,5 +1,6 @@
 import { Button} from "reactstrap";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleUp, faStar } from "@fortawesome/free-solid-svg-icons";
 
@@ -44,7 +45,7 @@ export  const getStaticProps = async () => {
       
       contasDoDevedor.forEach((conta) => {
         if(conta.statusConta==="NP"){
-        id = Math.random() + quantidadeContas,
+        id = conta.codigo,
         nome = conta.nomeConta;
         valorTotal += conta.valor;
         quantidadeContas++;
@@ -67,53 +68,88 @@ export  const getStaticProps = async () => {
 
 const arraySimplificado = simplificarContas(novoArray);
 
+let valorTotalContas = 0;
+
+for(var x=0;x<arraySimplificado.length;x++){
+  valorTotalContas += arraySimplificado[x].valorTotal;
+}
+
   return {
-      props: { dados: arraySimplificado }
+      props: { dados: arraySimplificado, totalContas: valorTotalContas }
   }
 }
 
-export default function Painel ({ dados }) {
+export default function Painel ({ dados, totalContas }) {
     
-    const Contas = dados;
+    const [Contas,setContas] = useState(dados);
+    const [originalContas,setOContas] = useState(Contas);
 
-    console.log(Contas)
+    useEffect(() => {
+      console.log('Lista de usuários atualizada:', Contas);
+    }, [Contas]);
+
+     function obterCor(constante) {
+      switch (constante) {
+        case 1:
+          return 'red';
+        case 2:
+          return 'yellow';
+        case 3:
+          return 'blue';
+        default:
+          return 'black';
+      }
+    }
+
+    async function pagarConta (codigo) {
+      Axios.put(`http://localhost:3001/pagar`, {
+        id: codigo
+      })
+      .then((response) => {
+        console.log(response);
+      });
+    }
+
+    async function elevarGrauImportancia(index) {
+      if(Contas[index].grauImportancia<3){
+      Contas[index].grauImportancia++;
+      }
+      console.log(Contas[index].grauImportancia)
+    }
+
 
     return (
-        <div className="container">
-
-          <h4>Valor Total do mês: R$ 3.000,00</h4>
+        <div className="bgDark">
+          <div className="container">
+            <h4 className="valorTotalTitle">Valor Total do mês: R$ {totalContas}</h4>
           
-          {Contas.map((Contas, key) => (
-
-            <div className="mycard mt-4" key={Contas.id}>
-
-
-              <div className="mycardHeader">
-                <span className="mycardTitle">{Contas.nome}</span>
-                <FontAwesomeIcon className="mycardStar" icon={faStar}/>
-              </div>
-
-              <div className="mycardBody">
-
-               <div className="mycardText">
-                <span >Valor Mês: R$ </span>
-                <span className="mb-1">Valor Total: R$ {Contas.valorTotal}</span>
-                <span className="mb-3">Prestações: {Contas.quantidadeContas}</span>
-               </div>
-
-               <div className="mycardButtons">
-                <button className="mycardPayedButton">Paga</button>
-                <button className="mycardUpstarsButton">
-                  <FontAwesomeIcon icon={faArrowCircleUp}/>
-                  <FontAwesomeIcon icon={faStar}/>
-                </button>
-               </div>
-
-              </div>
-
+            <div className="orgCards">
+              {Contas.map((Contas, key) => (
+                <div className="mycard mt-4" key={Contas.id}>
+                  <div className="mycardHeader">
+                    <span className="mycardTitle">{Contas.nome}</span>
+                    <FontAwesomeIcon style={{ color: obterCor(Contas.grauImportancia) }} className="mycardStar" icon={faStar}/>
+                  </div>
+                  <div className="mycardBody">
+                   <div className="mycardText">
+                    <span className="mycardSpan" >Valor Mês: R$ {Contas.valorContaMaisRecente}</span>
+                    <span className="mb-1 mycardSpan">Valor Total: R$ {Contas.valorTotal}</span>
+                    <span className="mb-3 mycardSpan">Prestações: {Contas.quantidadeContas}</span>
+                   </div>
+                   <div className="mycardButtons">
+                    <button onClick={() => {pagarConta(Contas.id)}} className="mycardPayedButton">Pagar</button>
+                    <button className="mycardUpstarsButton">
+                      <FontAwesomeIcon
+                       onClick={() => {elevarGrauImportancia(key)}}
+                       icon={faArrowCircleUp}/>
+                      <FontAwesomeIcon icon={faStar}/>
+                    </button>
+                   </div>
+                  </div>
+                </div>
+                  ))}
             </div>
-              ))}
-
+          </div>
         </div>
     )
 }

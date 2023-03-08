@@ -16,34 +16,32 @@ export default function Header () {
   const toggle = () => setIsOpen(!isOpen);
 
     return(
-  <div className="hrSty">
-        <Navbar expand="sm" className="mt-2 ">
+  <div className="hrSty bgDark">
+        <Navbar expand="sm" className="pt-2 bgDark">
         <NavbarBrand href="/painel">
         <Image src={Logo} width={140} height={52} />
       </NavbarBrand>
-          <NavbarToggler onClick={toggle}/>
+          <NavbarToggler onClick={toggle} className="navbar-dark"/>
           <Collapse isOpen={isOpen} navbar >
             <Nav className="me-auto p-2" navbar>
             <NavItem className="navIntem">
-                  <NavLink href="/painel">Home</NavLink>
+                  <NavLink href="/painel" className="reactStrapNav">Home</NavLink>
               </NavItem>
               <NavItem>
-                  <NavLink href="/historico">Histórico</NavLink>
+                  <NavLink href="/historico" className="reactStrapNav">Histórico</NavLink>
               </NavItem>
               <UncontrolledDropdown nav inNavbar>
-                <DropdownToggle nav caret>
+                <DropdownToggle nav caret className="reactStrapNav">
                 Inventário
                 </DropdownToggle>
                 <DropdownMenu right>
-                    <DropdownItem href="/inventario/grade">Grades</DropdownItem>
+                    <DropdownItem href="/inventario/grade" >Grades</DropdownItem>
                     <DropdownItem href="/inventario/porta-portoes">Portas/Portões</DropdownItem>
                     <DropdownItem  href="/inventario/outros">Outros</DropdownItem>
                 </DropdownMenu>
               </UncontrolledDropdown>
             </Nav>
-          </Collapse>
-
-          <UncontrolledDropdown
+            <UncontrolledDropdown
               className="me-2"
               direction="start"
             >
@@ -67,8 +65,11 @@ export default function Header () {
                 </DropdownItem>
               </DropdownMenu>
             </UncontrolledDropdown>
+          </Collapse>
+
+
         </Navbar>
-        <hr/>
+        
       </div>
 
   
