@@ -3,6 +3,7 @@ import '../styles/geralPages.css';
 import '../styles/inventarioStyle.css';
 import '../styles/componentsStyles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from '@/components/Header';
 
 

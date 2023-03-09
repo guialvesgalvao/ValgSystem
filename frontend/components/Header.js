@@ -19,7 +19,7 @@ export default function Header () {
   <div className="hrSty bgDark">
         <Navbar expand="sm" className="pt-2 bgDark">
         <NavbarBrand href="/painel">
-        <Image src={Logo} width={140} height={52} />
+        <Image src={Logo} alt="Logo Valg System" width={140} height={52} />
       </NavbarBrand>
           <NavbarToggler onClick={toggle} className="navbar-dark"/>
           <Collapse isOpen={isOpen} navbar >
@@ -34,7 +34,7 @@ export default function Header () {
                 <DropdownToggle nav caret className="reactStrapNav">
                 Inventário
                 </DropdownToggle>
-                <DropdownMenu right>
+                <DropdownMenu end>
                     <DropdownItem href="/inventario/grade" >Grades</DropdownItem>
                     <DropdownItem href="/inventario/porta-portoes">Portas/Portões</DropdownItem>
                     <DropdownItem  href="/inventario/outros">Outros</DropdownItem>

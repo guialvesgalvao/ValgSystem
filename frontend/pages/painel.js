@@ -1,8 +1,9 @@
-import { Button} from "reactstrap";
+import { Button, Toast, ToastHeader, ToastBody} from "reactstrap";
 import { useState, useEffect } from "react";
 import Axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleUp, faStar } from "@fortawesome/free-solid-svg-icons";
+import { ToastContainer, toast } from 'react-toastify';
 
 export  const getStaticProps = async () => {
 
@@ -28,40 +29,62 @@ export  const getStaticProps = async () => {
 
   function simplificarContas(array) {
     const novoArray = [];
-    
+  
     array.forEach((contasDoDevedor) => {
-      let id ;
+      let id;
       let nome = "";
       let valorTotal = 0;
       let quantidadeContas = 0;
       let valorContaMaisRecente = 0;
       let grauImportancia = 0;
-
+  
       contasDoDevedor.sort((a, b) => {
-        const [diaA, mesA] = a.vencimento.split('/');
-        const [diaB, mesB] = b.vencimento.split('/');
+        const [diaA, mesA] = a.vencimento.split("/");
+        const [diaB, mesB] = b.vencimento.split("/");
         return new Date(2023, mesB - 1, diaB) - new Date(2023, mesA - 1, diaA);
       });
-      
+  
       contasDoDevedor.forEach((conta) => {
-        if(conta.statusConta==="NP"){
-        id = conta.codigo,
-        nome = conta.nomeConta;
-        valorTotal += conta.valor;
-        quantidadeContas++;
-        grauImportancia = conta.grauImportancia;
-      }
-
-
-      if (valorContaMaisRecente === 0) {
-        valorContaMaisRecente = conta.valor;
-      }
-
+        if (conta.statusConta === "NP") {
+          if (
+            conta.codigo !== undefined &&
+            conta.nomeConta !== undefined &&
+            conta.valor !== undefined &&
+            conta.grauImportancia !== undefined &&
+            conta.vencimento !== undefined
+          ) {
+            id = conta.codigo;
+            nome = conta.nomeConta;
+            valorTotal += conta.valor;
+            quantidadeContas++;
+            grauImportancia = conta.grauImportancia;
+  
+            if (valorContaMaisRecente === 0) {
+              valorContaMaisRecente = conta.valor;
+            }
+          }
+        }
       });
-      
-      novoArray.push({ id, nome, valorTotal, quantidadeContas,valorContaMaisRecente, grauImportancia });
+  
+      if (
+        id !== undefined &&
+        nome !== "" &&
+        valorTotal !== 0 &&
+        quantidadeContas !== 0 &&
+        valorContaMaisRecente !== 0 &&
+        grauImportancia !== 0
+      ) {
+        novoArray.push({
+          id,
+          nome,
+          valorTotal,
+          quantidadeContas,
+          valorContaMaisRecente,
+          grauImportancia,
+        });
+      }
     });
-    
+  
     return novoArray;
   }
 
@@ -101,13 +124,16 @@ export default function Painel ({ dados, totalContas }) {
       }
     }
 
-    async function pagarConta (codigo) {
+    async function pagarConta (codigo,index) {
       Axios.put(`http://localhost:3001/pagar`, {
         id: codigo
       })
       .then((response) => {
         console.log(response);
       });
+
+      Contas.splice(index, 1);
+      console.log(Contas)
     }
 
     async function elevarGrauImportancia(index) {
@@ -117,9 +143,32 @@ export default function Painel ({ dados, totalContas }) {
       console.log(Contas[index].grauImportancia)
     }
 
+    const notify = async () => toast.success('Conta paga com sucesso', {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
 
     return (
         <div className="bgDark">
+          <ToastContainer
+          position="bottom-left"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="light"
+          />
+          <ToastContainer />
           <div className="container">
             <h4 className="valorTotalTitle">Valor Total do mês: R$ {totalContas}</h4>
           
@@ -137,7 +186,7 @@ export default function Painel ({ dados, totalContas }) {
                     <span className="mb-3 mycardSpan">Prestações: {Contas.quantidadeContas}</span>
                    </div>
                    <div className="mycardButtons">
-                    <button onClick={() => {pagarConta(Contas.id)}} className="mycardPayedButton">Pagar</button>
+                    <button onClick={() => {pagarConta(Contas.id,key)}} className="mycardPayedButton">Pagar</button>
                     <button className="mycardUpstarsButton">
                       <FontAwesomeIcon
                        onClick={() => {elevarGrauImportancia(key)}}
@@ -150,6 +199,8 @@ export default function Painel ({ dados, totalContas }) {
                   ))}
             </div>
           </div>
+
+
         </div>
     )
 }

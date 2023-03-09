@@ -1,4 +1,4 @@
-import { Button, Table, Modal, ModalHeader, ModalBody, ModalFooter} from "reactstrap";
+import { Button, Table, Modal, ModalHeader, ModalBody, ModalFooter, Toast, ToastHeader, ToastBody} from "reactstrap";
 import { useState } from "react";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -147,7 +147,7 @@ export default function Painel ({ dados }) {
             <button className="" >
               <FontAwesomeIcon
                icon={faMagnifyingGlass}
-               size=""/>
+               />
             </button>
           </div>
 
@@ -155,7 +155,7 @@ export default function Painel ({ dados }) {
 
         <div className="tableStyle mt-5">
         
-          <Table dark bordered hover size="sm" >
+          <Table dark bordered hover responsive >
             <thead>
               <tr>
                 <th>#</th>
@@ -217,6 +217,7 @@ export default function Painel ({ dados }) {
               ))}
             </tbody>
           </Table>
+
 
           
           <Modal isOpen={modalInserir} toggle={toggleInserir} >

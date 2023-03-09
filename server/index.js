@@ -71,7 +71,6 @@ app.put("/editarContas", (req,res) =>{
     const { statusConta } = req.body;
     const { vencimento } = req.body;
 
-
     let SQL = "UPDATE conta SET nomeConta = ?, valor = ?, obs = ?, statusConta = ?, vencimento = ? WHERE codigo = ?";
 
     db.query(SQL, [nome, valor, obs, statusConta, vencimento, id], (err, result) => {
