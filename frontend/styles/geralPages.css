@@ -1,31 +1,70 @@
-.telaLogin{
+/* Login */
+
+.containerLogin{
     height: 100vh;
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
 }
 
-.loginStyle {
+.divImageLogin{
+    width: 50%;
+}
+
+.inputLoginSty {
+    width: 100%;
+    margin-bottom: 4.5%;
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.textRecsenhaLogin{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    
+    font-size: 0.75rem;
+    color: #648cb4;
+}
+
+.divLoginStyle {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-items: center;
-
-    border: 1px solid black;
-    border-radius: 20px;
-
-    padding: 1.5% 3%;
 }
+
+.textInitialLogin{
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+.buttonLogin {
+    background-color: #2f4b8b;
+    color: #f4f4f4;
+    padding: 6px 4px 6px 4px;
+    border-radius: 4px;
+    border: none;
+}
+
+.buttonLogin:hover{
+    background-color: rgba(47,75,139, 0.85);
+}
+
+.manterConectadoLogin{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* outros */
 
 .reactStrapNav {
     color: #f4f4f4 !important;
     font-family:  'Montserrat', sans-serif;
 }
 
-.inputLoginSty {
-    margin-bottom: 4.5%;
-    padding: 10px;
-}
 
 .tableStyle{
     width: 60%;

@@ -10,6 +10,20 @@
     box-shadow: 0px 4px 0px 0px rgba(0, 0, 0, 0.05);
  }
 
+  /* Header Unlogged */
+.hunlDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+}
+
+.arrowToBack{
+    font-size: 1.8rem;
+    color: black;
+}
+
 /* Card */
 .bgDark{
     background-color: #100F10;

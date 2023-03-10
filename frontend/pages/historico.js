@@ -2,9 +2,9 @@ import { Button, Table, Modal, ModalHeader, ModalBody, ModalFooter, Toast, Toast
 import { useState } from "react";
 import axios from 'axios';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClose, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faClose, faEdit, faPlus, faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 
+import Header from '@/components/Header';
 
 export  const getStaticProps = async () => {
 
@@ -125,256 +125,239 @@ export default function Painel ({ dados }) {
     }
 
     return (
-        <div className="centerDivs bgDark">
-
-        <div className="divBarTop">
-
-          <div>
-            <Button color="primary" onClick={toggleInserir} >
-            <FontAwesomeIcon 
-            icon={faPlus}/>
-                <span className="ml-2"> Inserir Conta</span>
-            </Button>
-          </div>
-
-          <div>
-            <input
-            className="rounded"
-            placeholder="Conta"
-            type="username"
-            value={codigo}
-            onChange={(e)=> setCodigo(e.target.value)}/>
-            <button className="" >
+      <div>
+        <Header />
+          <div className="centerDivs bgDark">
+          <div className="divBarTop">
+            <div>
+              <Button color="primary" onClick={toggleInserir} >
               <FontAwesomeIcon
-               icon={faMagnifyingGlass}
-               />
-            </button>
+              icon={faPlus}/>
+                  <span className="ml-2"> Inserir Conta</span>
+              </Button>
+            </div>
+            <div>
+              <input
+              className="rounded"
+              placeholder="Conta"
+              type="username"
+              value={codigo}
+              onChange={(e)=> setCodigo(e.target.value)}/>
+              <button className="" >
+                <FontAwesomeIcon
+                 icon={faMagnifyingGlass}
+                 />
+              </button>
+            </div>
           </div>
-
-        </div>
-
-        <div className="tableStyle mt-5">
+          <div className="tableStyle mt-5">
         
-          <Table dark bordered hover responsive >
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>Nome Conta</th>
-                <th>Valor</th>
-                <th>Vencimento</th>
-                <th>Status</th>
-                <th>Obs</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-                {Contas.map((Contas, key) => (
-                  <tr key={Contas.codigo}>
-                <th scope="row">
-                {Contas.codigo}
-                </th>
-                <td>
-                {Contas.nomeConta}
-                </td>
-                <td>
-                R$ {Contas.valor}
-                </td>
-                <td>
-                {Contas.vencimento}
-                </td>
-                <td>
-                {Contas.statusConta}
-                </td>
-                <td>
-                {Contas.obs}
-                </td>
-                <td>
-                <Button 
-                color="info" 
-                onClick={() => {
-                  editarDadosLocal({
-                  id: Contas.codigo,
-                nome:Contas.nomeConta,
-                valor:Contas.valor,
-                vencimento: Contas.vencimento,
-                status: Contas.statusConta,
-                obs: Contas.obs
-                }),
-                toggleEditar();
-                }}>
-                <FontAwesomeIcon icon={faEdit}/></Button>
-                <span> </span>
-                <Button 
-                onClick={() => {
-                  setIdDeletar(Contas.codigo),
-                  toggleDeletar();
-                }}
-                color="danger">
-                  <FontAwesomeIcon icon={faClose}/>
-                </Button>
-                </td>
+            <Table dark bordered hover responsive >
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Nome Conta</th>
+                  <th>Valor</th>
+                  <th>Vencimento</th>
+                  <th>Status</th>
+                  <th>Obs</th>
+                  <th></th>
                 </tr>
-              ))}
-            </tbody>
-          </Table>
-
-
-          
-          <Modal isOpen={modalInserir} toggle={toggleInserir} >
-          <ModalHeader toggle={toggleInserir}>Inserir Conta</ModalHeader>
-          <ModalBody>
-                  <input
-                  title="Conta"
-                  className="inputInsertPage"
-                  placeholder="Conta"
-                  type="username"
-                  value={nomeConta}
-                  onChange={(e)=> setNomeConta(e.target.value)}/>
-                  <input
-                  title="Valor"
-                  className="inputInsertPage"
-                  placeholder="Valor"
-                  type="number"
-                  value={valor}
-                  onChange={(e)=> setValor(e.target.value)}/>
-                  <input
-                  title="Observação"
-                  className="inputInsertPage"
-                  placeholder="Observação"
-                  type="text"
-                  value={obs}
-                  onChange={(e)=> setObs(e.target.value)}/>
-                  <input
-                  title="Vencimento"
-                  className="inputInsertPage"
-                  placeholder="Vencimento"
-                  type="text"
-                  value={vencimento}
-                  onChange={(e)=> setVencimento(e.target.value)}/>
-                  <input
-                  title="Status"
-                  className="inputInsertPage"
-                  placeholder="Status"
-                  type="text"
-                  value={statusConta}
-                  onChange={(e)=> setStatusConta(e.target.value)}/>
-                  <input
-                  title="Grau Importância"
-                  className="inputInsertPage"
-                  placeholder="Grau Importância"
-                  type="number"
-                  value={grauImportancia}
-                  onChange={(e)=> setGrauImportancia(e.target.value)}/>
-                  <input
-                  title="Código Relacional"
-                  className="inputInsertPage"
-                  placeholder="Código Relacional"
-                  type="number"
-                  value={codigoRelacional}
-                  onChange={(e)=> setCodigoRelacional(e.target.value)}/>
-                  <input
-                  title="Código Mensal"
-                  className="inputInsertPage"
-                  placeholder="Código Mensal"
-                  type="number"
-                  value={codigoMensal}
-                  onChange={(e)=> setCodigoMensal(e.target.value)}/>
-          </ModalBody>
-          <ModalFooter>
+              </thead>
+              <tbody>
+                  {Contas.map((Contas, key) => (
+                    <tr key={Contas.codigo}>
+                  <th scope="row">
+                  {Contas.codigo}
+                  </th>
+                  <td>
+                  {Contas.nomeConta}
+                  </td>
+                  <td>
+                  R$ {Contas.valor}
+                  </td>
+                  <td>
+                  {Contas.vencimento}
+                  </td>
+                  <td>
+                  {Contas.statusConta}
+                  </td>
+                  <td>
+                  {Contas.obs}
+                  </td>
+                  <td>
+                  <Button
+                  color="info"
+                  onClick={() => {
+                    editarDadosLocal({
+                    id: Contas.codigo,
+                  nome:Contas.nomeConta,
+                  valor:Contas.valor,
+                  vencimento: Contas.vencimento,
+                  status: Contas.statusConta,
+                  obs: Contas.obs
+                  }),
+                  toggleEditar();
+                  }}>
+                  <FontAwesomeIcon icon={faEdit}/></Button>
+                  <span> </span>
+                  <Button
+                  onClick={() => {
+                    setIdDeletar(Contas.codigo),
+                    toggleDeletar();
+                  }}
+                  color="danger">
+                    <FontAwesomeIcon icon={faClose}/>
+                  </Button>
+                  </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+        
+            <Modal isOpen={modalInserir} toggle={toggleInserir} >
+            <ModalHeader toggle={toggleInserir}>Inserir Conta</ModalHeader>
+            <ModalBody>
+                    <input
+                    title="Conta"
+                    className="inputInsertPage"
+                    placeholder="Conta"
+                    type="username"
+                    value={nomeConta}
+                    onChange={(e)=> setNomeConta(e.target.value)}/>
+                    <input
+                    title="Valor"
+                    className="inputInsertPage"
+                    placeholder="Valor"
+                    type="number"
+                    value={valor}
+                    onChange={(e)=> setValor(e.target.value)}/>
+                    <input
+                    title="Observação"
+                    className="inputInsertPage"
+                    placeholder="Observação"
+                    type="text"
+                    value={obs}
+                    onChange={(e)=> setObs(e.target.value)}/>
+                    <input
+                    title="Vencimento"
+                    className="inputInsertPage"
+                    placeholder="Vencimento"
+                    type="text"
+                    value={vencimento}
+                    onChange={(e)=> setVencimento(e.target.value)}/>
+                    <input
+                    title="Status"
+                    className="inputInsertPage"
+                    placeholder="Status"
+                    type="text"
+                    value={statusConta}
+                    onChange={(e)=> setStatusConta(e.target.value)}/>
+                    <input
+                    title="Grau Importância"
+                    className="inputInsertPage"
+                    placeholder="Grau Importância"
+                    type="number"
+                    value={grauImportancia}
+                    onChange={(e)=> setGrauImportancia(e.target.value)}/>
+                    <input
+                    title="Código Relacional"
+                    className="inputInsertPage"
+                    placeholder="Código Relacional"
+                    type="number"
+                    value={codigoRelacional}
+                    onChange={(e)=> setCodigoRelacional(e.target.value)}/>
+                    <input
+                    title="Código Mensal"
+                    className="inputInsertPage"
+                    placeholder="Código Mensal"
+                    type="number"
+                    value={codigoMensal}
+                    onChange={(e)=> setCodigoMensal(e.target.value)}/>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={()=> {
+                axiosPost();
+                toggleInserir();
+              }}>
+                Salvar
+              </Button>
+              <Button color="secondary" onClick={toggleInserir}>
+                Cancelar
+              </Button>
+            </ModalFooter>
+                  </Modal>
+        
+            <Modal isOpen={modalEditar} toggle={toggleEditar} >
+            <ModalHeader toggle={toggleEditar}>Editar Conta</ModalHeader>
+            <ModalBody>
+                    <input
+                    title="Conta"
+                    className="inputInsertPage"
+                    placeholder="Conta"
+                    type="username"
+                    value={nomeContaEditar}
+                    onChange={(e)=> setNomeContaEditar(e.target.value)}/>
+                    <input
+                    title="Valor"
+                    className="inputInsertPage"
+                    placeholder="Valor"
+                    type="number"
+                    value={valorEditar}
+                    onChange={(e)=> setValorEditar(e.target.value)}/>
+                    <input
+                    title="Observação"
+                    className="inputInsertPage"
+                    placeholder="Observação"
+                    type="text"
+                    value={obsEditar}
+                    onChange={(e)=> setObsEditar(e.target.value)}/>
+                    <input
+                    title="Vencimento"
+                    className="inputInsertPage"
+                    placeholder="Vencimento"
+                    type="text"
+                    value={vencimentoEditar}
+                    onChange={(e)=> setVencimentoEditar(e.target.value)}/>
+                    <input
+                    title="Status"
+                    className="inputInsertPage"
+                    placeholder="Status"
+                    type="text"
+                    value={statusContaEditar}
+                    onChange={(e)=> setStatusContaEditar(e.target.value)}/>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="primary" onClick={()=> {
+                enviarDadosLocaisEditados();
+                toggleEditar();
+              }}>
+                Salvar
+              </Button>
+              <Button color="secondary" onClick={toggleEditar}>
+                Cancelar
+              </Button>
+            </ModalFooter>
+          </Modal>
+          <Modal isOpen={modalDeletar} toggle={toggleDeletar} >
+            <ModalHeader toggle={toggleDeletar}>Confirmar Exclusão</ModalHeader>
+            <ModalBody>
+              Você tem certeza que deseja excluir a conta?
+            </ModalBody>
+            <ModalFooter>
             <Button color="primary" onClick={()=> {
-              axiosPost();
-              toggleInserir();
-            }}>
-              Salvar
-            </Button>
-            <Button color="secondary" onClick={toggleInserir}>
-              Cancelar
-            </Button>
-          </ModalFooter>
-                </Modal>
-
-
-
-
-
-
-
-
-
-                
-
-          <Modal isOpen={modalEditar} toggle={toggleEditar} >
-          <ModalHeader toggle={toggleEditar}>Editar Conta</ModalHeader>
-          <ModalBody>
-                  <input
-                  title="Conta"
-                  className="inputInsertPage"
-                  placeholder="Conta"
-                  type="username"
-                  value={nomeContaEditar}
-                  onChange={(e)=> setNomeContaEditar(e.target.value)}/>
-                  <input
-                  title="Valor"
-                  className="inputInsertPage"
-                  placeholder="Valor"
-                  type="number"
-                  value={valorEditar}
-                  onChange={(e)=> setValorEditar(e.target.value)}/>
-                  <input
-                  title="Observação"
-                  className="inputInsertPage"
-                  placeholder="Observação"
-                  type="text"
-                  value={obsEditar}
-                  onChange={(e)=> setObsEditar(e.target.value)}/>
-                  <input
-                  title="Vencimento"
-                  className="inputInsertPage"
-                  placeholder="Vencimento"
-                  type="text"
-                  value={vencimentoEditar}
-                  onChange={(e)=> setVencimentoEditar(e.target.value)}/>
-                  <input
-                  title="Status"
-                  className="inputInsertPage"
-                  placeholder="Status"
-                  type="text"
-                  value={statusContaEditar}
-                  onChange={(e)=> setStatusContaEditar(e.target.value)}/>
-          </ModalBody>
-          <ModalFooter>
-            <Button color="primary" onClick={()=> {
-              enviarDadosLocaisEditados();
-              toggleEditar();
-            }}>
-              Salvar
-            </Button>
-            <Button color="secondary" onClick={toggleEditar}>
-              Cancelar
-            </Button>
-          </ModalFooter>
-        </Modal>
-
-
-
-        <Modal isOpen={modalDeletar} toggle={toggleDeletar} >
-          <ModalHeader toggle={toggleDeletar}>Confirmar Exclusão</ModalHeader>
-          <ModalBody>
-            Você tem certeza que deseja excluir a conta?
-          </ModalBody>
-          <ModalFooter>
-          <Button color="primary" onClick={()=> {
-              deleteConta();
-              toggleDeletar();
-            }}>
-              Deletar
-            </Button>
-            <Button color="secondary" onClick={toggleDeletar}>
-              Cancelar
-            </Button>
-          </ModalFooter>
-        </Modal>
-        </div>
-        </div>
+                deleteConta();
+                toggleDeletar();
+              }}>
+                Deletar
+              </Button>
+              <Button color="secondary" onClick={toggleDeletar}>
+                Cancelar
+              </Button>
+            </ModalFooter>
+          </Modal>
+          </div>
+          </div>
+      </div>
     )
 }

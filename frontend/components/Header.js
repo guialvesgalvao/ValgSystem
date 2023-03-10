@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 
 import Image from "next/image";
-import Logo from "../public/logo-com-fundo.png";
+import Logo from "../public/logo-com-fundo.webp";
 
 import React, { useState } from 'react';
 
@@ -18,9 +18,9 @@ export default function Header () {
     return(
   <div className="hrSty bgDark">
         <Navbar expand="sm" className="pt-2 bgDark">
-        <NavbarBrand href="/painel">
-        <Image src={Logo} alt="Logo Valg System" width={140} height={52} />
-      </NavbarBrand>
+          <NavbarBrand >
+          <Image src={Logo} alt="Logo Valg System" width={140} height={52} />
+                </NavbarBrand>
           <NavbarToggler onClick={toggle} className="navbar-dark"/>
           <Collapse isOpen={isOpen} navbar >
             <Nav className="me-auto p-2" navbar>
@@ -60,7 +60,7 @@ export default function Header () {
                   Usuário
                 </DropdownItem>
                 <DropdownItem divider />
-                <DropdownItem>
+                <DropdownItem href="/">
                   Sair
                 </DropdownItem>
               </DropdownMenu>

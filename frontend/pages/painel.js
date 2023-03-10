@@ -5,6 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleUp, faStar } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from 'react-toastify';
 
+import Header from '@/components/Header';
+
+
 export  const getStaticProps = async () => {
 
   const res = await fetch('http://localhost:3001/contas');
@@ -89,13 +92,13 @@ export  const getStaticProps = async () => {
   }
 
 
-const arraySimplificado = simplificarContas(novoArray);
+  const arraySimplificado = simplificarContas(novoArray);
 
-let valorTotalContas = 0;
+  let valorTotalContas = 0;
 
-for(var x=0;x<arraySimplificado.length;x++){
-  valorTotalContas += arraySimplificado[x].valorTotal;
-}
+  for(var x=0;x<arraySimplificado.length;x++){
+    valorTotalContas += arraySimplificado[x].valorTotal;
+  }
 
   return {
       props: { dados: arraySimplificado, totalContas: valorTotalContas }
@@ -155,52 +158,53 @@ export default function Painel ({ dados, totalContas }) {
     });
 
     return (
-        <div className="bgDark">
-          <ToastContainer
-          position="bottom-left"
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-          theme="light"
-          />
-          <ToastContainer />
-          <div className="container">
-            <h4 className="valorTotalTitle">Valor Total do mês: R$ {totalContas}</h4>
+        <div>
+          <Header />
+          <div className="bgDark">
+            <ToastContainer
+            position="bottom-left"
+            autoClose={5000}
+            hideProgressBar={false}
+            newestOnTop={false}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            />
+            <ToastContainer />
+            <div className="container">
+              <h4 className="valorTotalTitle">Valor Total do mês: R$ {totalContas}</h4>
           
-            <div className="orgCards">
-              {Contas.map((Contas, key) => (
-                <div className="mycard mt-4" key={Contas.id}>
-                  <div className="mycardHeader">
-                    <span className="mycardTitle">{Contas.nome}</span>
-                    <FontAwesomeIcon style={{ color: obterCor(Contas.grauImportancia) }} className="mycardStar" icon={faStar}/>
+              <div className="orgCards">
+                {Contas.map((Contas, key) => (
+                  <div className="mycard mt-4" key={Contas.id}>
+                    <div className="mycardHeader">
+                      <span className="mycardTitle">{Contas.nome}</span>
+                      <FontAwesomeIcon style={{ color: obterCor(Contas.grauImportancia) }} className="mycardStar" icon={faStar}/>
+                    </div>
+                    <div className="mycardBody">
+                     <div className="mycardText">
+                      <span className="mycardSpan" >Valor Mês: R$ {Contas.valorContaMaisRecente}</span>
+                      <span className="mb-1 mycardSpan">Valor Total: R$ {Contas.valorTotal}</span>
+                      <span className="mb-3 mycardSpan">Prestações: {Contas.quantidadeContas}</span>
+                     </div>
+                     <div className="mycardButtons">
+                      <button onClick={() => {pagarConta(Contas.id,key)}} className="mycardPayedButton">Pagar</button>
+                      <button className="mycardUpstarsButton">
+                        <FontAwesomeIcon
+                         onClick={() => {elevarGrauImportancia(key)}}
+                         icon={faArrowCircleUp}/>
+                        <FontAwesomeIcon icon={faStar}/>
+                      </button>
+                     </div>
+                    </div>
                   </div>
-                  <div className="mycardBody">
-                   <div className="mycardText">
-                    <span className="mycardSpan" >Valor Mês: R$ {Contas.valorContaMaisRecente}</span>
-                    <span className="mb-1 mycardSpan">Valor Total: R$ {Contas.valorTotal}</span>
-                    <span className="mb-3 mycardSpan">Prestações: {Contas.quantidadeContas}</span>
-                   </div>
-                   <div className="mycardButtons">
-                    <button onClick={() => {pagarConta(Contas.id,key)}} className="mycardPayedButton">Pagar</button>
-                    <button className="mycardUpstarsButton">
-                      <FontAwesomeIcon
-                       onClick={() => {elevarGrauImportancia(key)}}
-                       icon={faArrowCircleUp}/>
-                      <FontAwesomeIcon icon={faStar}/>
-                    </button>
-                   </div>
-                  </div>
-                </div>
-                  ))}
+                    ))}
+              </div>
             </div>
           </div>
-
-
         </div>
     )
 }
