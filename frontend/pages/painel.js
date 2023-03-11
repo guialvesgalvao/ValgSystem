@@ -101,14 +101,15 @@ export  const getStaticProps = async () => {
   }
 
   return {
-      props: { dados: arraySimplificado, totalContas: valorTotalContas }
+      props: { dados: arraySimplificado, totaldasContas: valorTotalContas }
   }
 }
 
-export default function Painel ({ dados, totalContas }) {
+export default function Painel ({ dados, totaldasContas }) {
     
     const [Contas,setContas] = useState(dados);
     const [originalContas,setOContas] = useState(Contas);
+    const [totalContas,setTotalContas] = useState(totaldasContas);
 
      function obterCor(constante) {
       switch (constante) {
@@ -131,7 +132,21 @@ export default function Painel ({ dados, totalContas }) {
         console.log(response);
       });
 
-      console.log(Contas)
+      if (Contas[index].quantidadeContas > 1) {
+        // Atualizar o valor de prestações no objeto correspondente no array
+        const novoArray = [...Contas];
+        novoArray[index] = {
+          ...novoArray[index],
+          quantidadeContas: novoArray[index].quantidadeContas - 1,
+        };
+        setContas(novoArray);
+      } else {
+        // Remover o objeto correspondente do array
+        const novoArray = Contas.filter((conta, i) => i !== index);
+        setContas(novoArray);
+      }
+
+      notify();
     }
 
     async function elevarGrauImportancia(index) {
