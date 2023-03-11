@@ -110,10 +110,6 @@ export default function Painel ({ dados, totalContas }) {
     const [Contas,setContas] = useState(dados);
     const [originalContas,setOContas] = useState(Contas);
 
-    useEffect(() => {
-      console.log('Lista de usuários atualizada:', Contas);
-    }, [Contas]);
-
      function obterCor(constante) {
       switch (constante) {
         case 1:
@@ -135,7 +131,6 @@ export default function Painel ({ dados, totalContas }) {
         console.log(response);
       });
 
-      Contas.splice(index, 1);
       console.log(Contas)
     }
 

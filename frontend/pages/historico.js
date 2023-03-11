@@ -6,7 +6,7 @@ import { faClose, faEdit, faPlus, faMagnifyingGlass } from '@fortawesome/free-so
 
 import Header from '@/components/Header';
 
-export  const getStaticProps = async () => {
+export const getStaticProps = async () => {
 
   const res = await fetch('http://localhost:3001/contas');
   const data = await res.json();
@@ -38,6 +38,8 @@ export default function Painel ({ dados }) {
     const [obsEditar, setObsEditar] = useState('');
     const [vencimentoEditar, setVencimentoEditar] = useState('');
     const [statusContaEditar, setStatusContaEditar] = useState('');
+    const [keyEditar, setKeyEditar] = useState(null);
+
 
     const [modalEditar, setModalEditar] = useState(false);
     const toggleEditar = () => setModalEditar(!modalEditar);
@@ -45,6 +47,7 @@ export default function Painel ({ dados }) {
     // states oara deletar //
 
     const [idDeletar, setIdDeletar] = useState(null);
+    const [keyDeletar, setKeyDeletar] = useState(null);
 
     const [modalDeletar, setModalDeletar] = useState(false);
     const toggleDeletar = () => setModalDeletar(!modalDeletar);
@@ -77,6 +80,17 @@ export default function Painel ({ dados }) {
       .catch(function (error) {
         console.log(error+"isso é um erro");
       });
+      setContas([...Contas, {
+        codigo: Contas[Contas.length - 1].codigo + 1,        
+        nomeConta: nomeConta,
+        valor: valor,
+        obs: obs,
+        statusConta: statusConta,
+        vencimento: vencimento,
+        grauImportancia: grauImportancia,
+        codigoRelacional: codigoRelacional,
+        codigoMensal: codigoMensal}]);
+        console.log(Contas);
     }
 
     async function enviarDadosLocaisEditados (){
@@ -98,10 +112,22 @@ export default function Painel ({ dados }) {
       .catch(function (error) {
           console.log(error + "isso é um erro");
       });
+
+      const novaContas = [...Contas]; 
+      novaContas[keyEditar] = { 
+        ...novaContas[keyEditar],      
+        id: idEditar,
+        nomeConta: nomeContaEditar,
+        valor: valorEditar,
+        obs: obsEditar,
+        statusConta: statusContaEditar,
+        vencimento: vencimentoEditar
+      };
+      setContas(novaContas);
     }
 
-    async function editarDadosLocal (Conta){
-      console.log(codigo)
+    async function editarDadosLocal (Conta,key){
+      setKeyEditar(Conta.index);
       setIdEditar(Conta.id);
       setNomeContaEditar(Conta.nome);
       setValorEditar(Conta.valor);
@@ -116,12 +142,15 @@ export default function Painel ({ dados }) {
           'Content-Type': 'application/json'
         }
       })
-      .then(function (response) {
-        toggleDeletar;
+      .then(function (res) {
+        toggleDeletar();
       })
       .catch(function (error) {
         console.log(error + "isso é um erro");
       });
+
+      const newContas = Contas.filter((conta, i) => i !== keyDeletar);
+      setContas(newContas);
     }
 
     return (
@@ -190,7 +219,8 @@ export default function Painel ({ dados }) {
                   color="info"
                   onClick={() => {
                     editarDadosLocal({
-                    id: Contas.codigo,
+                  index: key,
+                  id: Contas.codigo,
                   nome:Contas.nomeConta,
                   valor:Contas.valor,
                   vencimento: Contas.vencimento,
@@ -204,6 +234,7 @@ export default function Painel ({ dados }) {
                   <Button
                   onClick={() => {
                     setIdDeletar(Contas.codigo),
+                    setKeyDeletar(key),
                     toggleDeletar();
                   }}
                   color="danger">

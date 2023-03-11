@@ -26,10 +26,10 @@ código mesal:
 código relacional para registro de contas:
 
 Flávio = 0;
-Vivo = 1;
-Água = 2;
-Energia = 3; 
-Ana Paula = 4;
+Vivo = 1;       1111
+Água = 2;         111111
+Energia = 3;   111
+Ana Paula = 4;  111111
 Célia = 5;
 Nil = 6;
 Gean e Tinoco = 7;
