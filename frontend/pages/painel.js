@@ -108,8 +108,7 @@ export  const getStaticProps = async () => {
 export default function Painel ({ dados, totaldasContas }) {
     
     const [Contas,setContas] = useState(dados);
-    const [originalContas,setOContas] = useState(Contas);
-    const [totalContas,setTotalContas] = useState(totaldasContas);
+    const [totalContas,setTotalContas] = useState(totaldasContas.toFixed(2));
 
      function obterCor(constante) {
       switch (constante) {
@@ -124,13 +123,18 @@ export default function Painel ({ dados, totaldasContas }) {
       }
     }
 
-    async function pagarConta (codigo,index) {
+    async function pagarConta (codigo, valor, index) {
+      console.log(Contas)
+
+
       Axios.put(`http://localhost:3001/pagar`, {
         id: codigo
       })
       .then((response) => {
         console.log(response);
       });
+
+      setTotalContas((totalContas - valor).toFixed(2))
 
       if (Contas[index].quantidadeContas > 1) {
         // Atualizar o valor de prestações no objeto correspondente no array
@@ -145,7 +149,6 @@ export default function Painel ({ dados, totaldasContas }) {
         const novoArray = Contas.filter((conta, i) => i !== index);
         setContas(novoArray);
       }
-
       notify();
     }
 
@@ -166,6 +169,7 @@ export default function Painel ({ dados, totaldasContas }) {
       progress: undefined,
       theme: "light",
     });
+
 
     return (
         <div>
@@ -201,7 +205,7 @@ export default function Painel ({ dados, totaldasContas }) {
                       <span className="mb-3 mycardSpan">Prestações: {Contas.quantidadeContas}</span>
                      </div>
                      <div className="mycardButtons">
-                      <button onClick={() => {pagarConta(Contas.id,key)}} className="mycardPayedButton">Pagar</button>
+                      <button onClick={() => {pagarConta(Contas.id, Contas.valorContaMaisRecente, key)}} className="mycardPayedButton">Pagar</button>
                       <button className="mycardUpstarsButton">
                         <FontAwesomeIcon
                          onClick={() => {elevarGrauImportancia(key)}}

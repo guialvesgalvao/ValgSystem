@@ -46,7 +46,7 @@ export default function Home() {
         </div>
         <div className="indexDivOrg">
           <div className='divTextIndex'>
-            <h2  className='display-4'>Simplifique sua vida financeira e de inventário</h2>
+            <h2  className='display-4'>Simplifique sua vida financeira e seu inventário</h2>
             <p className='lead'>Nunca mais se preocupe em esquecer de pagar uma conta importante - nosso sistema envia lembretes personalizados para você.</p>
           </div>
           <div  className='divImageIndex1'>
