@@ -1,11 +1,12 @@
 import { Button, Toast, ToastHeader, ToastBody} from "reactstrap";
-import { useState, useEffect } from "react";
+import { useState, useEffect,useContext } from "react";
 import Axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleUp, faStar } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from 'react-toastify';
 
 import Header from '@/components/Header';
+import { AppContext } from "@/contexts/AppContext";
 
 
 export  const getStaticProps = async () => {
@@ -106,6 +107,10 @@ export  const getStaticProps = async () => {
 }
 
 export default function Painel ({ dados, totaldasContas }) {
+
+    const {teste} = useContext(AppContext);
+
+    console.log(teste)
     
     const [Contas,setContas] = useState(dados);
     const [totalContas,setTotalContas] = useState(totaldasContas.toFixed(2));

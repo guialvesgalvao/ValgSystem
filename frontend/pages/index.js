@@ -40,7 +40,7 @@ export default function Home() {
             height={400}/>
           </div>
           <div className='divTextIndex'>
-            <h6 className='display-5'>O sistema que vai transformar sua vida financeira e de inventário</h6>
+            <h6 className='display-5'>O sistema que vai transformar sua vida financeira </h6>
             <p className='lead'>Simplifique sua vida financeira com nosso sistema de gerenciamento de contas e inventário fácil de usar.</p>
           </div>
         </div>
