@@ -9,6 +9,8 @@ import { AppProvider } from '../contexts/AppContext';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-toastify/dist/ReactToastify.css';
 
+var teste = Date();
+
 
 function MyApp({ Component, pageProps }) {
   return (

@@ -46,3 +46,19 @@ Nosso sistema é a solução completa para o gerenciamento eficiente de suas con
 Não deixe que suas finanças se tornem um fardo - nosso sistema torna tudo simples e fácil.
 Nós tornamos fácil para você gerenciar suas contas e inventário - comece a usar hoje e experimente a diferença.
 Não deixe o gerenciamento de suas finanças ser uma fonte de estresse - deixe nosso sistema cuidar disso para você.
+
+
+
+Soluções a serem desenvolvidas ->
+
+- página de testes
+- pasta de armazenamento de funções
+- modo de exibição (tema dark/light)
+- cadastrar-contas recorrentes
+- informações pessoais de usuário salvas no context da aplicação
+  - adicionar círculo de foto do usuário
+
+
+branchs e versões
+
+version 1.1
