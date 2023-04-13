@@ -26,10 +26,10 @@ código mesal:
 código relacional para registro de contas:
 
 Flávio = 0;
-Vivo = 1;       1111
-Água = 2;         111111
-Energia = 3;   111
-Ana Paula = 4;  111111
+Vivo = 1;
+Água = 2;
+Energia = 3;
+Ana Paula = 4;  
 Célia = 5;
 Nil = 6;
 Gean e Tinoco = 7;
@@ -58,7 +58,21 @@ Soluções a serem desenvolvidas ->
 - informações pessoais de usuário salvas no context da aplicação
   - adicionar círculo de foto do usuário
 
+-criar uma tabela com contas recorrentes✅, a partir dai eu crio uma conexão entre uma conta recorrente e uma verificação na lista de todas as contas, para saber se existe uma conta recorrente com aquele mês atual em que a aplicação foi aberta, caso exista significa que as contas foram resetadas
+
 
 branchs e versões
 
 version 1.1
+
+
+lembretes git !
+
+novas branchs -> 
+  git checkout -b "nova-versão"
+
+alterando entre branchs ->
+  git checkout main || nova-versão
+
+juntar versão à main ->
+  git merge nova-versão >>>> após isso mandar um push origin main
