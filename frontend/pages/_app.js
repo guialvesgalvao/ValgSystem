@@ -3,6 +3,8 @@ import '../styles/geralPages.css';
 import '../styles/inventarioStyle.css';
 import '../styles/componentsStyles.css';
 import '../styles/indexStyle.css';
+import '../styles/cadContasStyle.css';
+
 
 import { AppProvider } from '../contexts/AppContext';
 

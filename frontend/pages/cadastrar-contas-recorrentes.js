@@ -1,6 +1,9 @@
+import { useState } from "react";
+import Header from "@/components/Header";
+import {CardBillRegisted} from "@/components/CardBillRegisted";
+
 export default function RegisterBills () {
-    return(
-        //dados que deverá conter na conta:
+            //dados que deverá conter na conta:
         //Nome: Nome da Conta
         //Valor: Defina um valor fixo ou médio para a conta, qualquer maior importância, o usuário poderá alterar na aba de todas as contas
         //Dia do vencimento: servirá para definir qual dia a conta vence todo mês Day(fixo)/Month(Variável);
@@ -10,11 +13,84 @@ export default function RegisterBills () {
         //Código Relacional: cada conta recorrente deverá conter um id único dela ( verificar bugs com o painel! )
         //Código Mensal: É settada uma data de ínicio do sistema e apartir daí todos os meses seguintes começam a ser relacionados por número, exemplo: 1 -> fevereiro/23 2-> março/23
 
-        //Opções para funções de 'delete' mysql;
+        //Código Mensal -> pegar o mês atual e colocar a partir deste
+        //Código Relacional -> somar +1 a cada
+        //Obs -> vazio
+        //StatusConta -> pré-settado como 'NP'
+
         
+        //Opções para funções de 'delete' mysql;
+
+        const [nomeConta, setNomeConta] = useState('');
+        const [valor, setValor] = useState(null);
+        const [obs, setObs] = useState('');
+        const [vencimento, setVencimento] = useState('');
+        const [statusConta, setStatusConta] = useState('NP');
+        const [grauImportancia, setGrauImportancia] = useState(null);
+        const [codigoRelacional, setCodigoRelacional] = useState(null);
+        const [codigoMensal, setCodigoMensal] = useState(null);
+
+    return(        
         <div>
-            <h1>aqui deve conter um formulário fixo ao topo onde o usuário vai registrar suas contas recorrentes, ou seja, aquelas que todo mês ele sempre precisa pagar, então de forma autómatica o aplicativo registrará para ele</h1>
-            <h2>aqui aparecerá todas as contas recorrentes que este usuário possuí, também deverá conter a opção de cancelar a recorrência de contas, a opção de editar a conta deverá ser opcional, então eu decidirei se vale a pena ou não implantar</h2>
+            <Header />
+            <div className="centerDivs mb-3 mt-2">
+                <h3>Cadastrar Contas Recorrentes</h3>
+            </div>
+            <div className="containerIndex">
+                    <input
+                    title="Conta"
+                    className="inputInsertPage"
+                    placeholder="Conta"
+                    type="username"
+                    value={nomeConta}
+                    onChange={(e)=> setNomeConta(e.target.value)}/>
+                    <input
+                    title="Valor"
+                    className="inputInsertPage"
+                    placeholder="Valor médio"
+                    type="number"
+                    value={valor}
+                    onChange={(e)=> setValor(e.target.value)}/>
+                    <input
+                    title="Vencimento"
+                    className="inputInsertPage"
+                    placeholder="Dia de vencimento"
+                    type="text"
+                    value={vencimento}
+                    onChange={(e)=> setVencimento(e.target.value)}/>
+
+                    <input
+                    title="Grau Importância"
+                    className="inputInsertPage"
+                    placeholder="Grau Importância"
+                    type="number"
+                    value={grauImportancia}
+                    onChange={(e)=> setGrauImportancia(e.target.value)}/>
+
+                    <input
+                    type="submit"
+                    className="inputInsertPage"
+                    value="Cadastrar" />
+            </div>
+            <div className="orgCards mt-4">
+                <div className="ccdDivCard mb-3">
+                        <div className="ccdTitle">
+                        <span className="ccdTitleName">Agua</span>
+                        <span className="ccdTitleCircle"></span>
+                        </div>
+                        <div className="ccdBody">
+                            <div className="ccdBodyIntem">
+                                <b>Valor</b>
+                                <span>R$ 55,90</span>
+                            </div>
+                            <div className="ccdBodyIntem">
+                                <b>Vencimento dia</b>
+                                <span>24</span>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <CardBillRegisted nome="aa" valor="22" grauImp="3"/>
         </div>
     )
 }

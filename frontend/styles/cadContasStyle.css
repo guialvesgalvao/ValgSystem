@@ -1,0 +1,45 @@
+.ccdDivCard{
+    width: 30%;
+    border: 1px solid black;
+    border-radius: 14px;
+}
+
+.ccdTitle{
+    background-color:#e0e0e0;
+    border-radius: 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2.5% 0%;
+}
+
+.ccdTitleName{
+    margin-left: 10px;
+}
+
+.ccdTitleCircle{
+    width: 20px;
+    height: 20px;
+    border-radius: 100px;
+    margin-right: 10px;
+}
+
+.ccdBody{
+    display: flex;
+    justify-content: space-between;
+    padding: 4%;
+}
+
+.ccdBodyIntem{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ccdDivCard{
+    
+}
+
+.ccdBodyVenc{
+    
+}
