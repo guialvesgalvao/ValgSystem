@@ -89,8 +89,10 @@ export default function RegisterBills () {
                             </div>
                         </div>
                 </div>
+                
             </div>
-            <CardBillRegisted nome="aa" valor="22" grauImp="3"/>
+            <CardBillRegisted className="mb-3" nome="aa" valor="22" grauImp={1}/>
+
         </div>
     )
 }

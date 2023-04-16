@@ -36,10 +36,17 @@
     align-items: center;
 }
 
-.ccdDivCard{
-    
+.ccdDivClose{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.ccdBodyVenc{
-    
+.ccdIconClose{
+    width: 18px;
+    height: 18px;
+    padding: 4px;
+    border-radius: 800px;
+    background-color: red;
+    color: #fff;
 }

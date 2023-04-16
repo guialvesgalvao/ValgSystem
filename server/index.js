@@ -13,6 +13,33 @@ const db = mysql.createPool({
 app.use(cors());
 app.use(express.json());
 
+app.post("/cadastrarContasRecorrentes", (req,res)=>{
+
+    const { nomeConta } = req.body;
+    const { valor } = req.body;
+    const { obs } = req.body;
+    const { statusConta } = req.body;
+    const { vencimento } = req.body;
+    const { grauImportancia } = req.body;
+    const { codigoRelacional } = req.body;
+    const { codigoMensal } = req.body;
+ 
+    let SQL = "INSERT INTO contaRecorrente (nomeConta, valor, obs, statusConta, vencimento, grauImportancia, codigoRelacional, codigoMensal) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    
+    db.query(SQL, [nomeConta, valor, obs, statusConta, vencimento, grauImportancia, codigoRelacional, codigoMensal], (err,result) => {
+     console.log(err);
+    });
+ });
+
+ app.delete("/deleteRecorrente/:id", (req,res) => {
+    const { id } = req.params;
+    let SQL = "DELETE FROM contaRecorrente WHERE codigo = ?";
+    db.query(SQL, [id], (err, result) => {
+        if (err) console.log(err);
+        else res.send(result);
+    });
+});
+
 app.post("/cadastrarContas", (req,res)=>{
 
    const { nomeConta } = req.body;
@@ -86,7 +113,8 @@ app.delete("/delete/:id", (req,res) => {
         if (err) console.log(err);
         else res.send(result);
     });
-})/
+});
+
 
 app.listen(3001, ()=>{
     console.log("rodando servidor")
