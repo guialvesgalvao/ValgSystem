@@ -13,6 +13,25 @@ const db = mysql.createPool({
 app.use(cors());
 app.use(express.json());
 
+app.get("/contasRecorrentes", (req,res) =>{
+
+    let SQL = "SELECT * from contaRecorrente";
+
+    db.query(SQL, (err, result) => {
+        if (err) console.log(err);
+        else res.send(result);
+    })
+});
+
+ app.delete("/deleteRecorrente/:id", (req,res) => {
+    const { id } = req.params;
+    let SQL = "DELETE FROM contaRecorrente WHERE codigo = ?";
+    db.query(SQL, [id], (err, result) => {
+        if (err) console.log(err);
+        else res.send(result);
+    });
+});
+
 app.post("/cadastrarContasRecorrentes", (req,res)=>{
 
     const { nomeConta } = req.body;
@@ -31,13 +50,14 @@ app.post("/cadastrarContasRecorrentes", (req,res)=>{
     });
  });
 
- app.delete("/deleteRecorrente/:id", (req,res) => {
-    const { id } = req.params;
-    let SQL = "DELETE FROM contaRecorrente WHERE codigo = ?";
-    db.query(SQL, [id], (err, result) => {
+app.get("/", (req,res) =>{
+
+    let SQL = "SELECT * from conta";
+
+    db.query(SQL, (err, result) => {
         if (err) console.log(err);
         else res.send(result);
-    });
+    })
 });
 
 app.post("/cadastrarContas", (req,res)=>{
@@ -56,16 +76,6 @@ app.post("/cadastrarContas", (req,res)=>{
    db.query(SQL, [nomeConta, valor, obs, statusConta, vencimento, grauImportancia, codigoRelacional, codigoMensal], (err,result) => {
     console.log(err);
    });
-});
-
-app.get("/", (req,res) =>{
-
-    let SQL = "SELECT * from conta";
-
-    db.query(SQL, (err, result) => {
-        if (err) console.log(err);
-        else res.send(result);
-    })
 });
 
 app.get("/contas", (req,res) =>{

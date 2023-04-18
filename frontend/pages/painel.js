@@ -5,11 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleUp, faStar } from "@fortawesome/free-solid-svg-icons";
 import { ToastContainer, toast } from 'react-toastify';
 
+import { parseCookies } from "nookies";
+
 import Header from '@/components/Header';
 import { AppContext } from "@/contexts/AppContext";
 
 
 export  const getStaticProps = async () => {
+
+  let cookies = parseCookies();
+  let cookieLogin = cookies.notifiedAboutBills; 
 
   const res = await fetch('http://localhost:3001/contas');
   const data = await res.json();
@@ -102,11 +107,11 @@ export  const getStaticProps = async () => {
   }
 
   return {
-      props: { dados: arraySimplificado, totaldasContas: valorTotalContas }
+      props: { dados: arraySimplificado, totaldasContas: valorTotalContas,cookieLogin: cookieLogin }
   }
 }
 
-export default function Painel ({ dados, totaldasContas }) {
+export default function Painel ({ dados, totaldasContas, cookieLogin }) {
 
     const {teste} = useContext(AppContext);
 
@@ -174,6 +179,25 @@ export default function Painel ({ dados, totaldasContas }) {
       progress: undefined,
       theme: "light",
     });
+
+    useEffect(() => {
+      if(cookieLogin){
+        notificacaoLogin();
+      }
+    }, []);
+
+    const notificacaoLogin = async () => toast.warning('Você tem contas a pagar', {
+      position: "bottom-left",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+    });
+
+
 
 
     return (
