@@ -78,7 +78,7 @@ export default function Painel ({ dados }) {
         toggleInserir();
       })
       .catch(function (error) {
-        console.log(error+"isso é um erro");
+        console.log(error);
       });
       setContas([...Contas, {
         codigo: Contas[Contas.length - 1].codigo + 1,        

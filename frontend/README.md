@@ -51,14 +51,16 @@ Não deixe o gerenciamento de suas finanças ser uma fonte de estresse - deixe n
 
 Soluções a serem desenvolvidas ->
 
-- página de testes
+- ❌ resetar contas-recorrentes
+- ❌ cadastrar-contas recorrentes -> determinar mês de inicio para códigoMensal
+- testar função "obter cor" necessário colocar async ou nn "
+- já foi criada a função de mandar notificação caso n tenha enviado as notificações para relembrar o cliente sobre contas✅ porém falta testar
+- página de testes(reset das contas recorrentes "tentar colocar em segundo plano")
 - pasta de armazenamento de funções
 - modo de exibição (tema dark/light)
-- cadastrar-contas recorrentes
+
 - informações pessoais de usuário salvas no context da aplicação
   - adicionar círculo de foto do usuário
-
--criar uma tabela com contas recorrentes✅, a partir dai eu crio uma conexão entre uma conta recorrente e uma verificação na lista de todas as contas, para saber se existe uma conta recorrente com aquele mês atual em que a aplicação foi aberta, caso exista significa que as contas foram resetadas
 
 
 branchs e versões

@@ -2,6 +2,16 @@ import { useState } from "react";
 import Header from "@/components/Header";
 import {CardBillRegisted} from "@/components/CardBillRegisted";
 
+export  const getStaticProps = async () => {
+    const res = await fetch('http://localhost:3001/contasRecorrentes');
+    const date = await res.json();
+    const data =  false;
+
+    return {
+        props: { contas: data }
+    }
+}
+
 export default function RegisterBills () {
             //dados que deverá conter na conta:
         //Nome: Nome da Conta
@@ -20,6 +30,42 @@ export default function RegisterBills () {
 
         
         //Opções para funções de 'delete' mysql;
+
+        async function axiosPost () {
+            axios.post("http://localhost:3001/cadastrarContasRecorrentes", {
+              nomeConta: nomeConta,
+              valor: valor,
+              obs: '',
+              statusConta: 'NP',
+              vencimento: vencimento,
+              grauImportancia: grauImportancia,
+              codigoRelacional: codigoRelacional, // buscar o último código na post do getStaticProps
+              codigoMensal: codigoMensal  // determinar mês de inicio
+            }, {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(function (response) {
+              // toggleInserir();       -- mostrar react-notify --
+            })
+            .catch(function (error) {
+              console.log(error);
+            });
+            setContas([...contas, {
+              codigo: contas[contas.length - 1].codigo + 1,        
+              nomeConta: nomeConta,
+              valor: valor,
+              obs: '',
+              statusConta: 'NP',
+              vencimento: vencimento,
+              grauImportancia: grauImportancia,
+              codigoRelacional: codigoRelacional, // buscar o último código na post do getStaticProps
+              codigoMensal: codigoMensal}]); // determinar mês de inicio
+              console.log(contas);
+          }
+
+        const [contas,setContas] = useState();
 
         const [nomeConta, setNomeConta] = useState('');
         const [valor, setValor] = useState(null);

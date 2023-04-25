@@ -3,11 +3,11 @@ import { faClose } from '@fortawesome/free-solid-svg-icons';
 
 export const CardBillRegisted = ({nome,valor,grauImp}) => {
 
-    function cancelarConta() {
+    async function cancelarConta() {
         
     }
 
-    function obterCor(constante) {
+    async function obterCor(constante) {
         switch (constante) {
           case 1:
             return 'red';

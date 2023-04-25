@@ -84,10 +84,7 @@ export default function Login() {
       settextoResposta("Quantidade de tentativas excedida, contate o administrador");
     }else{
       if(username=="adm" && password=="adm"){
-        setCookie(null, 'notifyBills', valorsejálebrouounn, {
-          maxAge:60*60*24,
-          path:'/',
-        });
+        checkNookies();
         Router.push('/painel');
         settextoResposta("");
       }
@@ -122,7 +119,6 @@ export default function Login() {
             <span><a href="">Recuperar Senha</a></span>
           </div>
           <button className="mb-4 buttonLogin" onClick={ConferirDados}>Entrar</button>
-          <button className="mb-4 buttonLogin" onClick={checkNookies}>Entrar</button>
           <span>Não tem uma conta? <strong>Clique aqui</strong></span>
       </div>
       </div>

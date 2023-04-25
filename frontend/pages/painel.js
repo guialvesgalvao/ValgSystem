@@ -14,7 +14,7 @@ import { AppContext } from "@/contexts/AppContext";
 export  const getStaticProps = async () => {
 
   let cookies = parseCookies();
-  let cookieLogin = cookies.notifiedAboutBills; 
+  let cookieLogin = cookies.notifiedAboutBills || false; 
 
   const res = await fetch('http://localhost:3001/contas');
   const data = await res.json();
@@ -115,7 +115,7 @@ export default function Painel ({ dados, totaldasContas, cookieLogin }) {
 
     const {teste} = useContext(AppContext);
 
-    console.log(teste)
+    console.log(cookieLogin)
     
     const [Contas,setContas] = useState(dados);
     const [totalContas,setTotalContas] = useState(totaldasContas.toFixed(2));
@@ -181,7 +181,7 @@ export default function Painel ({ dados, totaldasContas, cookieLogin }) {
     });
 
     useEffect(() => {
-      if(cookieLogin){
+      if(true){
         notificacaoLogin();
       }
     }, []);
