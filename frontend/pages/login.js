@@ -112,14 +112,36 @@ export default function Login() {
           <h3><strong>Valg System</strong></h3>
         </div>
         <p>{textoResposta}</p>
-          <input className="inputLoginSty" placeholder="Username" type="username" value={username} onChange={(e)=> setUsername(e.target.value)}/>
-          <input  className="inputLoginSty" placeholder="Senha" type="password" value={password} onChange={(e)=> setPassword(e.target.value)} />
+          <input 
+          className="inputLoginSty" 
+          placeholder="Username" 
+          type="username" 
+          value={username} 
+          onChange={(e)=> setUsername(e.target.value)}/>
+          <input  
+          className="inputLoginSty" 
+          placeholder="Senha" 
+          type="password" 
+          value={password} 
+          onChange={(e)=> setPassword(e.target.value)} />
           <div className="textRecsenhaLogin mt-2 mb-3">
-            <span className="manterConectadoLogin"><input type="checkbox"/> Manter Conectado</span>
-            <span><a href="">Recuperar Senha</a></span>
+            <span className="manterConectadoLogin">
+              <input type="checkbox"/>
+              Manter Conectado
+              </span>
+            <span>
+              <a href="">Recuperar Senha</a>
+            </span>
           </div>
-          <button className="mb-4 buttonLogin" onClick={ConferirDados}>Entrar</button>
-          <span>Não tem uma conta? <strong>Clique aqui</strong></span>
+          <button 
+          className="mb-4 buttonLogin" 
+          onClick={ConferirDados}>
+            Entrar
+          </button>
+          <span>
+            Não tem uma conta? 
+            <strong>Clique aqui</strong>
+          </span>
       </div>
       </div>
     </div>
