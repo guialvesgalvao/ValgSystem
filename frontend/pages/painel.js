@@ -12,7 +12,7 @@ import Header from '@/components/Header';
 export  const getStaticProps = async () => {
 
   let cookies = parseCookies();
-  let cookieLogin = cookies.notifiedAboutBills || false; 
+  let cookieLogin = cookies.notifiedAboutBills || true; 
 
   const res = await fetch('http://localhost:3001/contas');
   const data = await res.json();
@@ -173,8 +173,12 @@ export default function Painel ({ dados, totaldasContas, cookieLogin }) {
     });
 
     useEffect(() => {
-      if(true){
+      if(cookieLogin){
         notificacaoLogin();
+        setCookie(null, 'notifiedAboutBills', true, {
+          maxAge:60*60*24,
+          path:'/',
+        });
       }
     }, []);
 

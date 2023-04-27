@@ -7,6 +7,7 @@ import Image from "next/image";
 import Router from "next/router";
 
 import Header from '@/components/Headerlogin';
+import axios from "axios";
 
 
 export default function Login() {
@@ -18,81 +19,23 @@ export default function Login() {
 
   const [textoResposta, settextoResposta] = useState("");
 
-  async function checkOlderBill(obj){
+  const takeDate = new Date();
+  const month = takeDate.getMonth() + 1 ;
 
-  let maiorMes = 0;
-
-    for(let y=0;y<obj.length;y++){
-      let objNow= obj[y].vencimento;
-      let dataDivider =objNow.split("/")
-      let monthNow = dataDivider[1];
-
-      if(monthNow>maiorMes){
-        maiorMes = monthNow;
-      }
-    }
-
-  return maiorMes;
-  }
-
-  async function checkNotify () {
-    const res = await fetch('http://localhost:3001/contas');
-    const data = await res.json();
-
-    let maiorMes = await checkOlderBill(data);
-
-    const getDate = new Date();
-    const month = getDate.getMonth() + 1 ;
-    
-    console.log("Mês atual: "+ month + " Maior mês: " + maiorMes);
-    if(month>=maiorMes){
-      return true
-    }else{
-      return false
-    }
-  }
-
-  async function checkNookies () {
-    //setCookie(null, 'notifiedAboutBills', true, {
-    //  maxAge:60*60*24,
-    //  path:'/',
-    //});
-    //destroyCookie(null, 'notifiedAboutBills')
-    // após vir com true, é necessário mudar para false depois de notificar
-    //no valor true, pode ser usado um array onde ele também passa além de true/false para notificado ou não, um valor referente ao mês ou a própria string da palavra referente ao mês
-    //*maxAge* = (sugestão) => use o tempo que falta para acabar o mês para designar a duração do cookie
-
-    let cookies = parseCookies();
-
-    if(!cookies.notifiedAboutBills){
-      if(checkNotify()){
-        setCookie(null, 'notifiedAboutBills', true, {
-          maxAge:60*60*24,
-          path:'/',
-        });
-      }else{
+  async function checkNotification() {
+    axios.get(`http://localhost:3001/checkmes/${month}`)
+    .then(response => {
+      if(response.data[0].notificado == false){
+        //parse.cookie
         setCookie(null, 'notifiedAboutBills', false, {
           maxAge:60*60*24,
           path:'/',
         });
       }
-    }
-  }
-
-  async function ConferirDados (){
-    if(nTentativas>=3){
-      settextoResposta("Quantidade de tentativas excedida, contate o administrador");
-    }else{
-      if(username=="adm" && password=="adm"){
-        checkNookies();
-        Router.push('/painel');
-        settextoResposta("");
-      }
-      else{
-        setnTentativas(nTentativas+1);
-        settextoResposta("Senha Incorreta");
-      }
-    }
+      })
+      .catch(error => {
+        console.log(error)
+      });
   }
 
   return (
@@ -135,7 +78,7 @@ export default function Login() {
           </div>
           <button 
           className="mb-4 buttonLogin" 
-          onClick={ConferirDados}>
+          onClick={checkNotification}>
             Entrar
           </button>
           <span>
