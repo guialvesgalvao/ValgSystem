@@ -1,0 +1,23 @@
+.tableStyle{
+    width: 60%;
+}
+
+.centerDivs{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.inputInsertPage{
+    padding: 10px;
+    margin-bottom: 2.5px;
+    border-radius: 3px;
+}
+
+.divBarTop{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}

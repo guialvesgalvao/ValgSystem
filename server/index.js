@@ -13,6 +13,31 @@ const db = mysql.createPool({
 app.use(cors());
 app.use(express.json());
 
+// ROTAS PARA CHECAR RESET DE CONTAS RECORRENTES // 
+
+app.get("/checkmes/:mes", (req,res) => {
+    const { mes } = req.params;
+    let SQL = "SELECT * FROM mesesReset WHERE numMes = ?";
+
+    db.query(SQL, [mes], (err, result) => {
+        if (err) console.log(err);
+        else res.send(result);
+    });
+});
+
+app.put("/confirmarResetMes", (req,res) =>{
+    const { mesNum } = req.body;
+
+    let SQL = "UPDATE mesesReset SET resetado = true WHERE mesNum = ?;";
+
+    db.query(SQL, [ mesNum ], (err, result) => {
+        if (err) console.log(err);
+        else res.send(result);
+    });
+});
+
+// ROTAS PARA CONTROLE DE CADASTRO DE CONTAS RECORRENTES
+
 app.get("/contasRecorrentes", (req,res) =>{
 
     let SQL = "SELECT * from contaRecorrente";
@@ -49,6 +74,9 @@ app.post("/cadastrarContasRecorrentes", (req,res)=>{
      console.log(err);
     });
  });
+
+
+// ROTAS PARA CONTROLE DO BANCO DE DADOS DE CONTAS // 
 
 app.get("/", (req,res) =>{
 

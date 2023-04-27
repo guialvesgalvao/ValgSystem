@@ -1,5 +1,4 @@
-import { Button, Toast, ToastHeader, ToastBody} from "reactstrap";
-import { useState, useEffect,useContext } from "react";
+import { useState, useEffect } from "react";
 import Axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleUp, faStar } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +7,6 @@ import { ToastContainer, toast } from 'react-toastify';
 import { parseCookies } from "nookies";
 
 import Header from '@/components/Header';
-import { AppContext } from "@/contexts/AppContext";
 
 
 export  const getStaticProps = async () => {
@@ -19,7 +17,7 @@ export  const getStaticProps = async () => {
   const res = await fetch('http://localhost:3001/contas');
   const data = await res.json();
 
-   function organizarPorCodigoRelacional(arrayInicial) {
+  function organizarPorCodigoRelacional(arrayInicial) {
     const mapeamento = {};
   
     for (const objeto of arrayInicial) {
@@ -112,10 +110,6 @@ export  const getStaticProps = async () => {
 }
 
 export default function Painel ({ dados, totaldasContas, cookieLogin }) {
-
-    const {teste} = useContext(AppContext);
-
-    console.log(cookieLogin)
     
     const [Contas,setContas] = useState(dados);
     const [totalContas,setTotalContas] = useState(totaldasContas.toFixed(2));
@@ -134,8 +128,6 @@ export default function Painel ({ dados, totaldasContas, cookieLogin }) {
     }
 
     async function pagarConta (codigo, valor, index) {
-      console.log(Contas)
-
 
       Axios.put(`http://localhost:3001/pagar`, {
         id: codigo
@@ -197,9 +189,6 @@ export default function Painel ({ dados, totaldasContas, cookieLogin }) {
       theme: "light",
     });
 
-
-
-
     return (
         <div>
           <Header />
@@ -251,6 +240,11 @@ export default function Painel ({ dados, totaldasContas, cookieLogin }) {
         </div>
     )
 }
+//CardBillPainel
+/*                {Contas.map((Contas, key) => (
+  <CardBillPainel key={key} nome={Contas.nome} grauImportancia={Contas.grauImportancia} valorContaMaisRecente={Contas.valorContaMaisRecente} valorContaTotal={Contas.valorTotal} quantidadeContas={Contas.quantidadeContas} contaId={Contas.id} obterCor={obterCor} pagarConta={pagarConta} Contas={Contas}/>
+  ))}
 
-
+    <CardBillPainel1 key={key} Contas={Contas} setContas={setContas} notify={notify} setTotalContas={setTotalContas} totalContas={totalContas}/>
+*/
 

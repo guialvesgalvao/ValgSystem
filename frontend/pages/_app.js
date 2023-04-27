@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import '../styles/geralPages.css';
+import '../styles/loginStyle.css';
 import '../styles/inventarioStyle.css';
 import '../styles/componentsStyles.css';
 import '../styles/indexStyle.css';

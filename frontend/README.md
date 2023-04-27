@@ -51,6 +51,7 @@ Não deixe o gerenciamento de suas finanças ser uma fonte de estresse - deixe n
 
 Soluções a serem desenvolvidas ->
 
+- ❗❗ é necessário fazer um teste mais breve possível, inserindo contas recorrentes e fazendo testes alterando os meses e alinhando com as notificações ❗❗
 - ❌ resetar contas-recorrentes
 - ❌ cadastrar-contas recorrentes -> determinar mês de inicio para códigoMensal
 - testar função "obter cor" necessário colocar async ou nn "
